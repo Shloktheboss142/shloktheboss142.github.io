@@ -1,7 +1,7 @@
-var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
+var animationEnd =
+  'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
 class Random {
-
   static generateBinary() {
     var random = Math.random();
     if (random > 0.5) {
@@ -13,9 +13,8 @@ class Random {
 
   static generate(min, max) {
     return Math.floor(Math.random() * max + min);
-  }}
-
-
+  }
+}
 
 class Binary {
   constructor() {
@@ -23,26 +22,26 @@ class Binary {
   }
 
   animate(ts, leftOffset, topOffset) {
-    var div = document.createElement("div");
-    $(div).css("font-size", ts + "px");
-    $(div).css("top", topOffset * (ts / 2));
-    $(div).css("left", leftOffset + "px");
+    var div = document.createElement('div');
+    $(div).css('font-size', ts + 'px');
+    $(div).css('top', topOffset * (ts / 2));
+    $(div).css('left', leftOffset + 'px');
     $(div).text(this.value);
-    $(div).addClass("binary");
+    $(div).addClass('binary');
     $(div).hide();
-    $("body").append(div);
-    $(div).show().addClass("animated fadeIn").on(animationEnd, this.fadeInEnd);
+    $('body').append(div);
+    $(div).show().addClass('animated fadeIn').on(animationEnd, this.fadeInEnd);
     return $(div).offset().top;
   }
 
   fadeInEnd(event) {
     var $binary = $(event.currentTarget);
-    $binary.removeClass("animated fadeIn");
-    $binary.addClass("animated fadeOut").on(animationEnd, function () {
+    $binary.removeClass('animated fadeIn');
+    $binary.addClass('animated fadeOut').on(animationEnd, function () {
       $binary.remove();
     });
-  }}
-
+  }
+}
 
 class BinaryLine {
   constructor(lO, tS, dS) {
@@ -67,21 +66,28 @@ class BinaryLine {
         clearInterval(interval);
       }
     }, 80);
-  }}
-
+  }
+}
 
 class BinaryAnimation {
   constructor() {}
 
   start() {
     setInterval(function () {
-      new BinaryLine(Random.generate(0, $(document).width()), Random.generate($(document).width() * 0.002, $(document).width() * 0.008), $(document).height()).generate();
+      new BinaryLine(
+        Random.generate(0, $(document).width()),
+        Random.generate(
+          $(document).width() * 0.009,
+          $(document).width() * 0.008
+        ),
+        $(document).height()
+      ).generate();
     }, 400);
 
     setInterval(function () {
-      $(".binary").remove();
+      $('.binary').remove();
     }, 30000);
-  }}
-
+  }
+}
 
 new BinaryAnimation().start();
